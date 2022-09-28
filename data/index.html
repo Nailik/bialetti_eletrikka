@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=yes">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="chart.js"></script>
+    <script src="luxon.js"></script>
+    <script src="chartjs-adapter-luxon.js"></script>
+
+    <title>ESP Website</title>
+</head>
+
+
+<!-- Actual html -->
+
+<body onload="updateStatus()">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ESP Website</a>
+        <h1 class="text-center" id="status_pid"></h1>
+        <button id="button" type="button" class="btn btn-primary" onclick="start()">Start</button>
+    </div>
+</nav>
+
+<div id="content">
+    <h1 class="text-center" id="status_button"></h1>
+    <h1 class="text-center" id="status_temp_1"></h1>
+    <h1 class="text-center" id="status_temp_2"></h1>
+    <canvas id="chart"></canvas>
+</div>
+
+<!--start tuning, tuning status, stop tuning, output, setpoint-->
+</body>
+
+<script>
+    const data = {
+        datasets: [
+            {
+                label: 'Temperature 1',
+                yAxisId: 'y',
+                backgroundColor: 'rgb(26,63,185)',
+                borderColor: 'rgb(26,63,185)',
+                data: [],
+            },
+            {
+                label: 'Temperature 2',
+                yAxisId: 'y',
+                backgroundColor: 'rgba(14,84,5,0.42)',
+                borderColor: 'rgba(14,84,5,0.42)',
+                data: []
+            },
+            {
+                label: 'SetPoint',
+                yAxisId: 'y',
+                backgroundColor: 'rgba(95,0,152,0.42)',
+                borderColor: 'rgba(95,0,152,0.42)',
+                data: []
+            },
+            {
+                label: 'Heating',
+                yAxisId: 'y1',
+                backgroundColor: 'rgba(162,12,16,0.42)',
+                borderColor: 'rgb(162,12,16)',
+                data: [],
+                fill: true
+            },
+            {
+                label: 'Relay',
+                yAxisId: 'y2',
+                backgroundColor: 'rgb(0,0,0)',
+                borderColor: 'rgb(0,0,0)',
+                data: []
+            }
+        ]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            elements: {
+                point: {
+                    radius: 0
+                }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'second',
+                        displayFormats: {
+                            second: 'HH:mm:ss'
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+
+                    // grid line settings
+                    grid: {
+                        drawOnChartArea: false, // only want the grid lines for one axis to show up
+                    },
+                },
+                y2: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+
+                    // grid line settings
+                    grid: {
+                        drawOnChartArea: false, // only want the grid lines for one axis to show up
+                    },
+                },
+            },
+            animation: {
+                duration: 0
+            }
+        }
+    };
+
+    const chart = new Chart(
+        document.getElementById('chart'),
+        config
+    );
+
+    function updateStatus() {
+        setInterval(function () {
+            requestUpdate("output");
+            requestUpdate("temp_1");
+            requestUpdate("temp_2");
+            requestUpdate("setPoint");
+            requestUpdate("pid");
+            requestUpdate("relay");
+         //   random()
+            updateChart()
+        }, 1000);
+    }
+
+    function random(){
+        addTempData(0, "{\"x\": " + Date.now() + ", \"y\": " + Math.random() + "}")
+        addTempData(1, "{\"x\": " + Date.now() + ", \"y\": " + Math.random() + "}")
+        addTempData(2, "{\"x\": " + Date.now() + ", \"y\": " + Math.random() + "}")
+    }
+
+    function start() {
+        document.getElementById('button').className = 'btn btn-success';
+        requestAction("pid")
+    }
+
+    function updateChart() {
+        chart.update();
+    }
+
+    function isMaxSize(index) {
+        if (chart.data.datasets[index].data.length > 0) {
+            let arr = chart.data.datasets[index].data
+            let diff = arr[arr.length - 1].x - arr[0].x
+            return diff > 60000
+        }
+        return false
+    }
+
+    function updateSensor(type, data) {
+        if (type === "output") {
+            addTempData(3, data)
+        } else if (type.startsWith("temp")) {
+            if (type === "temp_1") {
+                addTempData(0, data)
+            } else if (type === "temp_2") {
+                addTempData(1, data)
+            }
+        } else if (type.startsWith("setPoint")) {
+            addTempData(2, data)
+        } else if (type.startsWith("relay")) {
+            addTempData(4, data)
+        } else if (type.startsWith("pid")) {
+            let text = data;
+            switch (text){
+                case 0: text = "sample"; break;
+                case 1: text = "test"; break;
+                case 2: text = "tunings"; break;
+                case 3: text = "runPid"; break;
+                case 4: text = "timerPid"; break;
+            }
+            document.getElementById("status_" + type).innerText = data;
+        }
+    }
+
+    function addTempData(index, data) {
+        while (isMaxSize(index)) {
+            chart.data.datasets[index].data.splice(0, 1)
+        }
+        chart.data.datasets[index].data.push(JSON.parse(data));
+    }
+
+    function requestUpdate(type) {
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                updateSensor(type, this.responseText)
+            }
+        }
+        request.open("GET", "/get?type=" + type, true);
+        request.send();
+    }
+
+    function requestAction(type) {
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                updateSensor(type, this.responseText)
+            }
+        }
+        request.open("PUT", "/set?type=" + type, true);
+        request.send();
+    }
+</script>
+<style>
+    /* custom css */
+
+    #content {
+        margin: 20px;
+    }
+
+    #chart {
+        max-height: 500px;
+    }
+</style>
+</html>
