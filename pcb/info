@@ -1,0 +1,375 @@
+{
+  "uuid": "a694d1b5f3a09fcc0d8bf904d3aadafa",
+  "path": "Offline/Electric%20Mokka%20Pot",
+  "name": "Electric Mokka Pot",
+  "content": "",
+  "created_at": "2022-07-10 12:25:45",
+  "updated_at": "2022-10-10 15:58:15",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "b4053bfb72cb78f6786ed5fadfc281ef",
+      "title": "Sheet_1",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "24eeb2ceca08480b92b847b6a310acda": 6,
+        "bb009484ef804a24ac5d18c54b249586": 8,
+        "e545f26e87c74952857381bd0bff848e": 1,
+        "319c1407b76842b5a16ed610bcfbb4bc": 1,
+        "b5953d65a4054165b11dfc39ebcbd953": 1,
+        "0554e6fbba7b4ba5b9beba960840072b": 1,
+        "5218139ae2314683ab9a0fc1840e3555": 1,
+        "8f5cae780c0a8ec7b7b995e1b2effd15": 1,
+        "1af94b4a239e45e6bc7a33fe89b6a424": 2,
+        "2937154d444748e4b5aa011a89509dd0": 1,
+        "527d665278b95e60b4d2819d27b9d422": 2,
+        "3aaeeb88af254713b466c60ff0aa070d": 2,
+        "613f73760804411aad59cf8fb28a094c": 1,
+        "353ff04a8071d3e6740fa5273965e20c": 2,
+        "42c84a31a85e4fe5913b682ca2875b0d": 2
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "UK-B0228-G5-160-JZ",
+          2,
+          "KEY-SMD_4P-L6.0-W6.0-P4.50-LS11.0",
+          "BTN,RESET",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C620316",
+            "BOM_Manufacturer": "USAKRO",
+            "BOM_Manufacturer Part": "UK-B0228-G5-160-JZ",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "3fda5ece3e4c452f97db9e8a8a998a5e",
+            "uuid": "3aaeeb88af254713b466c60ff0aa070d"
+          }
+        ],
+        [
+          "0.1uf",
+          5,
+          "C0603",
+          "C1,C2,C3,C5,C7",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "47uf",
+          1,
+          "CASE-A_3216",
+          "C4",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "ce25118ef0b041b8a773e71ca28ae65d",
+            "uuid": "e545f26e87c74952857381bd0bff848e"
+          }
+        ],
+        [
+          "10uf",
+          1,
+          "C0603",
+          "C6",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "XH-4A",
+          2,
+          "CONN-TH_XH-4A",
+          "CN1,CN2",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C68117",
+            "BOM_Manufacturer": "BOOMELE(博穆精密)",
+            "BOM_Manufacturer Part": "XH-4A 黄色",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "09d6dfd5f1bd45ad9666677f79297f6a",
+            "uuid": "42c84a31a85e4fe5913b682ca2875b0d"
+          }
+        ],
+        [
+          "ESP-12F(ESP8266MOD)",
+          1,
+          "WIFIM-SMD_ESP-12F-ESP8266MOD",
+          "ESP",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "Ai-Thinker",
+            "BOM_Manufacturer Part": "ESP-12F(ESP8266MOD)",
+            "BOM_Supplier Part": "C82891",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "21bb26c585544e17a64bb2b57131b3de",
+            "uuid": "b5953d65a4054165b11dfc39ebcbd953"
+          }
+        ],
+        [
+          "39212000000",
+          2,
+          "FUSE-TH_L8.5-W4.0-P5.08-D0.6",
+          "F1,F2",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C142678",
+            "BOM_Manufacturer": "Littelfuse",
+            "BOM_Manufacturer Part": "39212000000",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "7913f343ceb14858ab6991f96a10c09d",
+            "uuid": "1af94b4a239e45e6bc7a33fe89b6a424"
+          }
+        ],
+        [
+          "PZ254V-12-6P",
+          1,
+          "HDR-TH_6P-P2.54-V-M-R2-C3-S2.54",
+          "H",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C492420",
+            "BOM_Manufacturer": "XFCN",
+            "BOM_Manufacturer Part": "PZ254V-12-6P",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "5034cc45f37345f69e0f5323801c5716",
+            "uuid": "319c1407b76842b5a16ed610bcfbb4bc"
+          }
+        ],
+        [
+          "LD1117DT33TR",
+          1,
+          "TO-252-2_L6.6-W6.1-P4.57-LS9.9-BR-CW",
+          "P2",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C132629",
+            "BOM_Manufacturer": "STMicroelectronics",
+            "BOM_Manufacturer Part": "LD1117DT33TR",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "2070be737d2d4c78a311b6f05f9d553e",
+            "uuid": "5218139ae2314683ab9a0fc1840e3555"
+          }
+        ],
+        [
+          "UA3-220S05A2",
+          1,
+          "PWRM-TH_UA3-220S05A2",
+          "PWR",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C135522",
+            "BOM_Manufacturer": "Guangzhou Aipu Elec Tech",
+            "BOM_Manufacturer Part": "UA3-220S05A2",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "476bc88b93424edb9a0e61bbaae97337",
+            "uuid": "0554e6fbba7b4ba5b9beba960840072b"
+          }
+        ],
+        [
+          "C2290",
+          2,
+          "LED0603-R-RD_WHITE",
+          "PWR_LED,STATUS_LED",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "KENTO",
+            "BOM_Manufacturer Part": "0603White light",
+            "BOM_Supplier Part": "C2290",
+            "BOM_JLCPCB Part Class": "Basic Part",
+            "puuid": "af16510a196f45a3b2eecfb1ed8360c1",
+            "uuid": "353ff04a8071d3e6740fa5273965e20c"
+          }
+        ],
+        [
+          "2N7002",
+          1,
+          "SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR",
+          "Q1",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "CJ",
+            "BOM_Manufacturer Part": "2N7002",
+            "BOM_Supplier Part": "C8545",
+            "BOM_JLCPCB Part Class": "Basic Part",
+            "puuid": "bade90667a6e4731855e9a223387b8a6",
+            "uuid": "8f5cae780c0a8ec7b7b995e1b2effd15"
+          }
+        ],
+        [
+          "10k",
+          4,
+          "R0603",
+          "R2,R3,R4,R7",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
+          "2K2",
+          1,
+          "R0603",
+          "R5",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
+          "10K",
+          1,
+          "R0603",
+          "R6",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
+          "50",
+          1,
+          "R0603",
+          "R8",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
+          "15",
+          1,
+          "R0603",
+          "R9",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
+          "KSD203AC2",
+          1,
+          "OPTO-TH_KSD203AC2",
+          "RELAY",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C920697",
+            "BOM_Manufacturer": "cosmo(冠西)",
+            "BOM_Manufacturer Part": "KSD203AC2",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "8db8b221decc4ace94eef0ba162e111c",
+            "uuid": "2937154d444748e4b5aa011a89509dd0"
+          }
+        ],
+        [
+          "XH-3A",
+          2,
+          "CONN-TH_XH-3A",
+          "SCON1,SCON2",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "BOOMELE",
+            "BOM_Manufacturer Part": "XH-3A",
+            "BOM_Supplier Part": "C2316",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "daafcc9fc94a4553a0445517deaa11c5",
+            "uuid": "527d665278b95e60b4d2819d27b9d422"
+          }
+        ],
+        [
+          "MR30-M",
+          1,
+          "CONN-TH_MR30-M",
+          "U2",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C99873",
+            "BOM_Manufacturer": "AMASS(艾迈斯)",
+            "BOM_Manufacturer Part": "MR30-M",
+            "puuid": "0be65554d3ce4b1796bcad5130d226bc",
+            "uuid": "613f73760804411aad59cf8fb28a094c"
+          }
+        ]
+      ],
+      "updateTime": 1665410295,
+      "createTime": 1657448745,
+      "histories": [],
+      "created_at": "2022-07-10 12:25:45",
+      "updated_at": "2022-10-10 15:58:15"
+    },
+    {
+      "uuid": "6949bddc308b1f468cee106af180105e",
+      "puuid": "a694d1b5f3a09fcc0d8bf904d3aadafa",
+      "title": "PCB_wifi iot module",
+      "filename": "PCB_wifi iot module.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "f8151fdc728a41ebbc304e11d39e5437": 6,
+        "398691f1f785460098bbe5ee6590333c": 8,
+        "bade90667a6e4731855e9a223387b8a6": 1,
+        "7913f343ceb14858ab6991f96a10c09d": 2,
+        "ce25118ef0b041b8a773e71ca28ae65d": 1,
+        "2070be737d2d4c78a311b6f05f9d553e": 1,
+        "0be65554d3ce4b1796bcad5130d226bc": 1,
+        "3fda5ece3e4c452f97db9e8a8a998a5e": 2,
+        "21bb26c585544e17a64bb2b57131b3de": 1,
+        "5034cc45f37345f69e0f5323801c5716": 1,
+        "476bc88b93424edb9a0e61bbaae97337": 1,
+        "8db8b221decc4ace94eef0ba162e111c": 1,
+        "daafcc9fc94a4553a0445517deaa11c5": 2,
+        "09d6dfd5f1bd45ad9666677f79297f6a": 2,
+        "af16510a196f45a3b2eecfb1ed8360c1": 2
+      },
+      "BOM": [],
+      "updateTime": 1665410269,
+      "createTime": 1660664456,
+      "histories": [],
+      "created_at": "2022-08-16 17:40:56",
+      "updated_at": "2022-10-10 15:57:49"
+    }
+  ],
+  "sort": [
+    "d628a0f80875b45f4927ded34d2eabc5",
+    "b4053bfb72cb78f6786ed5fadfc281ef",
+    "58952aa7c274453578661529a17519f7"
+  ],
+  "title": "Electric Mokka Pot",
+  "foldername": "Electric Mokka Pot",
+  "schfilename": "Electric Mokka Pot.json",
+  "schfilemtime": 1665410295342
+}
