@@ -171,10 +171,8 @@ void WebServer::setup() {
                 Actions::toggleRelay();
                 response = String(Pid::status);
             } else if (type == "led_1") {
-                Actions::toggleLed(1);
                 response = String(Sensors::led_1);
             } else if (type == "led_2") {
-                Actions::toggleLed(2);
                 response = String(Sensors::led_2);
             } else {
                 request->send(500, "text/plain", "wrong type");

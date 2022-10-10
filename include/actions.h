@@ -10,7 +10,6 @@ class Actions {
 public:
     static void setup();
     static void toggleRelay();
-    static void toggleLed(int id);
 };
 
 
