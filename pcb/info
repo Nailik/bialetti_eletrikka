@@ -4,7 +4,7 @@
   "name": "Electric Mokka Pot",
   "content": "",
   "created_at": "2022-07-10 12:25:45",
-  "updated_at": "2022-10-10 15:58:15",
+  "updated_at": "2022-10-10 23:08:25",
   "stick": "",
   "documents": [
     {
@@ -15,8 +15,8 @@
       "master": "",
       "thumb": "/images/thumb-default.png",
       "components": {
-        "24eeb2ceca08480b92b847b6a310acda": 6,
-        "bb009484ef804a24ac5d18c54b249586": 8,
+        "24eeb2ceca08480b92b847b6a310acda": 7,
+        "bb009484ef804a24ac5d18c54b249586": 9,
         "e545f26e87c74952857381bd0bff848e": 1,
         "319c1407b76842b5a16ed610bcfbb4bc": 1,
         "b5953d65a4054165b11dfc39ebcbd953": 1,
@@ -56,9 +56,9 @@
         ],
         [
           "0.1uf",
-          5,
+          6,
           "C0603",
-          "C1,C2,C3,C5,C7",
+          "C1,C2,C3,C5,C7,C8",
           {
             "BOM_Supplier Part": "",
             "BOM_Supplier": "",
@@ -214,6 +214,19 @@
           }
         ],
         [
+          "100",
+          1,
+          "R0603",
+          "R1",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
           "10k",
           4,
           "R0603",
@@ -253,7 +266,7 @@
           }
         ],
         [
-          "50",
+          "68Ω",
           1,
           "R0603",
           "R8",
@@ -266,7 +279,7 @@
           }
         ],
         [
-          "15",
+          "15Ω",
           1,
           "R0603",
           "R9",
@@ -323,11 +336,11 @@
           }
         ]
       ],
-      "updateTime": 1665410295,
+      "updateTime": 1665436105,
       "createTime": 1657448745,
       "histories": [],
       "created_at": "2022-07-10 12:25:45",
-      "updated_at": "2022-10-10 15:58:15"
+      "updated_at": "2022-10-10 23:08:25"
     },
     {
       "uuid": "6949bddc308b1f468cee106af180105e",
@@ -339,8 +352,8 @@
       "master": "",
       "thumb": "/images/thumb-default.png",
       "components": {
-        "f8151fdc728a41ebbc304e11d39e5437": 6,
-        "398691f1f785460098bbe5ee6590333c": 8,
+        "f8151fdc728a41ebbc304e11d39e5437": 7,
+        "398691f1f785460098bbe5ee6590333c": 9,
         "bade90667a6e4731855e9a223387b8a6": 1,
         "7913f343ceb14858ab6991f96a10c09d": 2,
         "ce25118ef0b041b8a773e71ca28ae65d": 1,
@@ -356,11 +369,11 @@
         "af16510a196f45a3b2eecfb1ed8360c1": 2
       },
       "BOM": [],
-      "updateTime": 1665410269,
+      "updateTime": 1665436021,
       "createTime": 1660664456,
       "histories": [],
       "created_at": "2022-08-16 17:40:56",
-      "updated_at": "2022-10-10 15:57:49"
+      "updated_at": "2022-10-10 23:07:01"
     }
   ],
   "sort": [
@@ -371,5 +384,5 @@
   "title": "Electric Mokka Pot",
   "foldername": "Electric Mokka Pot",
   "schfilename": "Electric Mokka Pot.json",
-  "schfilemtime": 1665410295342
+  "schfilemtime": 1665436105607
 }
