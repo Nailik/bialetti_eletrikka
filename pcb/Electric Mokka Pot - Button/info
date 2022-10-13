@@ -1,0 +1,169 @@
+{
+  "uuid": "330ec474e0f7591bb6146ff137eec2eb",
+  "path": "Offline/Electric%20Mokka%20Pot%20-%20Button",
+  "name": "Electric Mokka Pot - Button",
+  "content": "",
+  "created_at": "2022-07-10 12:25:45",
+  "updated_at": "2022-10-13 14:45:07",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "caf27ee5381e38975bee24a07da67112",
+      "title": "Sheet_1",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "353ff04a8071d3e6740fa5273965e20c": 2,
+        "bb009484ef804a24ac5d18c54b249586": 3,
+        "24eeb2ceca08480b92b847b6a310acda": 1,
+        "3aaeeb88af254713b466c60ff0aa070d": 1,
+        "42c84a31a85e4fe5913b682ca2875b0d": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "UK-B0228-G5-160-JZ",
+          1,
+          "KEY-SMD_4P-L6.0-W6.0-P4.50-LS11.0",
+          "BTN",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C620316",
+            "BOM_Manufacturer": "USAKRO",
+            "BOM_Manufacturer Part": "UK-B0228-G5-160-JZ",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "3fda5ece3e4c452f97db9e8a8a998a5e",
+            "uuid": "3aaeeb88af254713b466c60ff0aa070d"
+          }
+        ],
+        [
+          "0.1uf",
+          1,
+          "C0603",
+          "C7",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "XH-4A",
+          1,
+          "CONN-TH_XH-4A",
+          "CN1",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C68117",
+            "BOM_Manufacturer": "BOOMELE(博穆精密)",
+            "BOM_Manufacturer Part": "XH-4A 黄色",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "09d6dfd5f1bd45ad9666677f79297f6a",
+            "uuid": "42c84a31a85e4fe5913b682ca2875b0d"
+          }
+        ],
+        [
+          "C2290",
+          2,
+          "LED0603-R-RD_WHITE",
+          "PWR_LED,STATUS_LED",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "KENTO",
+            "BOM_Manufacturer Part": "0603White light",
+            "BOM_Supplier Part": "C2290",
+            "BOM_JLCPCB Part Class": "Basic Part",
+            "puuid": "af16510a196f45a3b2eecfb1ed8360c1",
+            "uuid": "353ff04a8071d3e6740fa5273965e20c"
+          }
+        ],
+        [
+          "10k",
+          1,
+          "R0603",
+          "R7",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
+          "68Ω",
+          1,
+          "R0603",
+          "R8",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ],
+        [
+          "15Ω",
+          1,
+          "R0603",
+          "R9",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "bb009484ef804a24ac5d18c54b249586"
+          }
+        ]
+      ],
+      "updateTime": 1665664927,
+      "createTime": 1657448745,
+      "histories": [],
+      "created_at": "2022-07-10 12:25:45",
+      "updated_at": "2022-10-13 14:42:07"
+    },
+    {
+      "uuid": "cd26706d1296d70008cb3389646c1fce",
+      "puuid": "a694d1b5f3a09fcc0d8bf904d3aadafa",
+      "title": "PCB_wifi iot module",
+      "filename": "PCB_wifi iot module.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "f8151fdc728a41ebbc304e11d39e5437": 1,
+        "398691f1f785460098bbe5ee6590333c": 3,
+        "3fda5ece3e4c452f97db9e8a8a998a5e": 1,
+        "af16510a196f45a3b2eecfb1ed8360c1": 2,
+        "09d6dfd5f1bd45ad9666677f79297f6a": 1
+      },
+      "BOM": [],
+      "updateTime": 1665665107,
+      "createTime": 1660664456,
+      "histories": [],
+      "created_at": "2022-08-16 17:40:56",
+      "updated_at": "2022-10-13 14:45:07"
+    }
+  ],
+  "sort": [
+    "d628a0f80875b45f4927ded34d2eabc5",
+    "b4053bfb72cb78f6786ed5fadfc281ef",
+    "58952aa7c274453578661529a17519f7"
+  ],
+  "title": "Electric Mokka Pot - Button",
+  "foldername": "Electric Mokka Pot - Button",
+  "schfilename": "Electric Mokka Pot.json",
+  "schfilemtime": 1665664927308
+}
