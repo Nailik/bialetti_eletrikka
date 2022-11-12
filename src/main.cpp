@@ -23,7 +23,7 @@ void setup() {
 void loop() {
     // put your main code here, to run repeatedly:
     Sensors::loop();
-   // Pid::loop();
+    Pid::loop();
     //custom loop for pid
     WebServer::loop();
 
@@ -31,5 +31,5 @@ void loop() {
         WebSerial.println(Serial.readString());
     }
 
-    delay(100);
+    delay(16);
 }

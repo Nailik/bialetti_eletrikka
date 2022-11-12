@@ -4,7 +4,7 @@
   "name": "Electric Mokka Pot - Button",
   "content": "",
   "created_at": "2022-07-10 12:25:45",
-  "updated_at": "2022-10-13 14:48:48",
+  "updated_at": "2022-11-12 14:47:03",
   "stick": "",
   "documents": [
     {
@@ -19,7 +19,7 @@
         "bb009484ef804a24ac5d18c54b249586": 3,
         "24eeb2ceca08480b92b847b6a310acda": 1,
         "3aaeeb88af254713b466c60ff0aa070d": 1,
-        "42c84a31a85e4fe5913b682ca2875b0d": 1
+        "57570b0fead1437eb1c14e07a68125a8": 1
       },
       "BOM": [
         [
@@ -58,25 +58,25 @@
           }
         ],
         [
-          "XH-4A",
+          "XH2.54-4AW",
           1,
-          "CONN-TH_XH-4A",
+          "CONN-TH_XH2.54-4AW",
           "CN1",
           {
             "BOM_Supplier": "LCSC",
-            "BOM_Supplier Part": "C68117",
-            "BOM_Manufacturer": "BOOMELE(博穆精密)",
-            "BOM_Manufacturer Part": "XH-4A 黄色",
+            "BOM_Manufacturer": "BOOMELE",
+            "BOM_Manufacturer Part": "XH2.54-4AW",
+            "BOM_Supplier Part": "C21273",
             "BOM_JLCPCB Part Class": "Extended Part",
-            "puuid": "09d6dfd5f1bd45ad9666677f79297f6a",
-            "uuid": "42c84a31a85e4fe5913b682ca2875b0d"
+            "puuid": "a7fe1e7f669543bbb9dbd363eab26f57",
+            "uuid": "57570b0fead1437eb1c14e07a68125a8"
           }
         ],
         [
           "C2290",
           2,
           "LED0603-R-RD_WHITE",
-          "PWR_LED,STATUS_LED",
+          "PWR,STATUS",
           {
             "BOM_Supplier": "LCSC",
             "BOM_Manufacturer": "KENTO",
@@ -127,11 +127,11 @@
           }
         ]
       ],
-      "updateTime": 1665665328,
+      "updateTime": 1668260247,
       "createTime": 1657448745,
       "histories": [],
       "created_at": "2022-07-10 12:25:45",
-      "updated_at": "2022-10-13 14:48:48"
+      "updated_at": "2022-11-12 14:37:27"
     },
     {
       "uuid": "cd26706d1296d70008cb3389646c1fce",
@@ -147,14 +147,14 @@
         "398691f1f785460098bbe5ee6590333c": 3,
         "3fda5ece3e4c452f97db9e8a8a998a5e": 1,
         "af16510a196f45a3b2eecfb1ed8360c1": 2,
-        "09d6dfd5f1bd45ad9666677f79297f6a": 1
+        "a7fe1e7f669543bbb9dbd363eab26f57": 1
       },
       "BOM": [],
-      "updateTime": 1665665107,
+      "updateTime": 1668260823,
       "createTime": 1660664456,
       "histories": [],
       "created_at": "2022-08-16 17:40:56",
-      "updated_at": "2022-10-13 14:45:07"
+      "updated_at": "2022-11-12 14:47:03"
     }
   ],
   "sort": [
@@ -165,5 +165,5 @@
   "title": "Electric Mokka Pot - Button",
   "foldername": "Electric Mokka Pot - Button",
   "schfilename": "Electric Mokka Pot.json",
-  "schfilemtime": 1665665328743
+  "schfilemtime": 1668260248007
 }

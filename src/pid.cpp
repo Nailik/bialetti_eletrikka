@@ -85,71 +85,123 @@ bei 65 grad kocht das wasser schon
 #include "sensors.h"
 #include "pid.h"
 #include "main.h"
-#include <sTune.h>
-#include <QuickPID.h>
 #include <Arduino.h>
 
-// user settings
-uint32_t Pid::settleTimeSec = 10;
-uint32_t Pid::testTimeSec = 10;  // runPid interval = testTimeSec / samples
-const uint16_t Pid::samples = 300;
-const float Pid::inputSpan = 60;
-const uint32_t Pid::outputSpan = 1000;
-float Pid::outputStart = 0;
-float Pid::outputStep = 10;
-float Pid::tempLimit = 100;
-uint8_t Pid::debounce = 0;
-
-// variables
-float Pid::Input;
-float Pid::Output;
-float Pid::SetPoint = 65;
-float Pid::Kp;
-float Pid::Ki;
-float Pid::Kd;
-
-bool Pid::isActive = false;
-
-
-int Pid::status = -1;
-
-sTune Pid::tuner = sTune(&Input, &Output, tuner.NoOvershoot_PID, tuner.directIP, tuner.printDEBUG);
-QuickPID Pid::quickPid(&Input, &Output, &SetPoint);
+float Pid::Output = 480;
+float Pid::SetPoint = 98;
+float Pid::FirstSetPoint = 80;
+float Pid::Offset = 1;
+float Pid::MaximumOutput = 480;
+//window size in ms
+uint32_t Pid::WindowSize = 480;
+float Pid::TempLimit = 120;
+bool Pid::IsActive = false;
 
 void Pid::setup() {
-    tuner.Configure(inputSpan, outputSpan, outputStart, outputStep, testTimeSec, settleTimeSec, samples);
-    tuner.SetEmergencyStop(tempLimit);
+
 }
 
+//läuft alle 100 ms
 void Pid::loop() {
-    if (isActive) {
-        tuner.softPwm(PIN_RELAY, Input, Output, SetPoint, outputSpan, debounce);
-        Sensors::relay = digitalRead(PIN_RELAY);
-        status = tuner.Run();
-
-        switch (status) {
-            case tuner.sample: // active once per sample during test
-                Input = Sensors::temp_1; // get degC (using 3.3v AREF)
-                break;
-            case tuner.tunings: // active just once when sTune is done
-                tuner.GetAutoTunings(&Kp, &Ki, &Kd); // sketch variables updated by sTune
-                quickPid.SetOutputLimits(0, outputSpan);
-                quickPid.SetSampleTimeUs((outputSpan - 1) * 1000);
-                Output = 0;
-                quickPid.SetMode(QuickPID::Control::automatic); // the PID is turned on
-                quickPid.SetProportionalMode(QuickPID::pMode::pOnMeas);
-                quickPid.SetAntiWindupMode(QuickPID::iAwMode::iAwClamp);
-                quickPid.SetTunings(Kp, Ki, Kd); // update PID with the new tunings
-                break;
-            case tuner.runPid: // active once per sample after tunings
-                Input = Sensors::temp_1; // get degC (using 3.3v AREF)
-                quickPid.Compute();
-                break;
-            default:
-                break;
-        }
+    if (IsActive) {//TODO reading input too fast
+        Output = softPwm(Sensors::temp_1, Output, SetPoint, WindowSize);
     } else {
         digitalWrite(PIN_RELAY, LOW);
-        Sensors::relay = digitalRead(PIN_RELAY);
     }
+}
+
+//output = ms zeit im fenster
+float Pid::softPwm(float input, float output, float setpoint, uint32_t windowSize) {
+//TODO every 8 ms
+    static bool forceStop;
+    static float inputChangeLastWindowStart;
+    static float inputWindowStart;
+
+    if (input >= TempLimit) {
+        //blink led
+        //forceStop = true;
+    }
+
+    if (forceStop) {
+      //  digitalWrite(PIN_RELAY, LOW);
+      //  return -1;
+    }
+
+    //current time
+    uint32_t msNow = millis();
+
+    static uint32_t windowStartTime;
+
+    //seit begin dess windows ist alle zeit vergangen -> neues window hat gestartet
+    if (msNow - windowStartTime >= windowSize) {
+        windowStartTime = msNow;
+        inputChangeLastWindowStart = input - inputWindowStart;
+        inputWindowStart = input;
+    }
+
+    // SSR optimum AC half-cycle controller
+    static float optimumOutput;
+    static bool reachedFirstSetpoint;
+    static bool reachedSetpoint;
+
+    if (input >= FirstSetPoint) reachedFirstSetpoint = true;
+    if (input >= SetPoint) reachedSetpoint = true;
+
+    //degree to power percentage ratio 1:1
+    if(!reachedFirstSetpoint) {
+        //1:1
+        optimumOutput = MaximumOutput;
+    } else {
+        //1:1
+        optimumOutput = MaximumOutput * (1-(input/SetPoint));
+    }
+
+    /*
+    static bool reachedSetpoint;
+    static bool reachedFirstSetpoint;
+
+    if (input >= FirstSetPoint) reachedFirstSetpoint = true;
+
+    //wurde setpoint erreicht?
+    if (input >= setpoint) reachedSetpoint = true;
+
+    if (reachedSetpoint && setpoint > 0 && input > setpoint) {
+        //wurde setpoint schonmal erreicht und input immernoch größer als setpoint, dann output -8
+        optimumOutput = output - 8;
+    }
+    else if (reachedSetpoint && setpoint > 0 && input < setpoint) {
+    //wurde setpoint schonmal erreicht und input kleiner setpoint, dann output erhöhen
+        optimumOutput = output + 8;
+    }
+    else if (reachedFirstSetpoint)  {
+        //would setpoint be reached within overshoottime?
+        if(input + (inputChangeLastWindowStart * (OvershootTime/WindowSize)) >= setpoint) {
+            //decrease power
+            optimumOutput = output - 8;
+        } else {
+            //increase power
+            optimumOutput = output + 8;
+        }
+        //decrease power slowly if temp is rising
+    }
+    else {
+        optimumOutput = output;
+    }*/
+
+    //optimum output = output, setpoint wurde noch nie erreicht
+    if (optimumOutput < 0) optimumOutput = 0;
+
+    if (optimumOutput > MaximumOutput) optimumOutput = MaximumOutput;
+
+    //optimale output größer als restzeit des fensters
+    if (optimumOutput > (msNow - windowStartTime)) {
+
+        digitalWrite(PIN_RELAY, HIGH);
+    } else if (optimumOutput < (msNow - windowStartTime)) {
+
+        digitalWrite(PIN_RELAY, LOW);
+    }
+
+    //return optimumOutput
+    return optimumOutput;
 }

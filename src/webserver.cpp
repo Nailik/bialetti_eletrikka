@@ -124,10 +124,10 @@ void WebServer::setup() {
 
             if (type == "output") {
                 //relay state
-                response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Pid::Output) + "}";
+                response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Pid::Output/10) + "}";
             } else if (type == "pid") {
                 //relay state
-                response = String(Pid::status);
+                response = String(Pid::IsActive);
             } else if (type == "setPoint") {
                 //relay state
                 response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Pid::SetPoint) + "}";
@@ -168,8 +168,8 @@ void WebServer::setup() {
 
             if (type == "pid") {
                 Serial.println("toggle relay");
-                Actions::toggleRelay();
-                response = String(Pid::status);
+                Actions::togglePid();
+                response = String(Pid::IsActive);
             } else if (type == "led_1") {
                 response = String(Sensors::led_1);
             } else if (type == "led_2") {

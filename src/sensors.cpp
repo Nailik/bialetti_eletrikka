@@ -51,6 +51,6 @@ void IRAM_ATTR Sensors::isr_btn() {
     Serial.println("isr_btn " + String(state));
     //will be high after button was released
     if(!state) {
-        Actions::toggleRelay();
+        Actions::togglePid();
     }
 }
