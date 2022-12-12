@@ -9,10 +9,10 @@ class Sensors {
 public:
     static int button;
     static int relay;
-    static int led_1;
-    static int led_2;
+    static int led;
     static float temp_1;
     static float temp_2;
+    static float temp_3;
     static void setup();
     static void loop();
     static void isr_btn();

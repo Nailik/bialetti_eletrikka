@@ -95,19 +95,20 @@ float Pid::MaximumOutput = 480;
 //window size in ms
 uint32_t Pid::WindowSize = 480;
 float Pid::TempLimit = 120;
-bool Pid::IsActive = false;
+int Pid::ZCTime = 0;
+unsigned long Pid::ZCTimeLast = 0;
+int Pid::value = 0;
 
 void Pid::setup() {
+    pinMode(PIN_RELAY, OUTPUT);
+    digitalWrite(PIN_RELAY, LOW);
 
+    attachInterrupt(digitalPinToInterrupt(PIN_SIGNAL_ZC), read, RISING);
 }
 
 //läuft alle 100 ms
 void Pid::loop() {
-    if (IsActive) {//TODO reading input too fast
-        Output = softPwm(Sensors::temp_1, Output, SetPoint, WindowSize);
-    } else {
-        digitalWrite(PIN_RELAY, LOW);
-    }
+    //Pid::zero_cross_int();
 }
 
 //output = ms zeit im fenster
@@ -123,8 +124,8 @@ float Pid::softPwm(float input, float output, float setpoint, uint32_t windowSiz
     }
 
     if (forceStop) {
-      //  digitalWrite(PIN_RELAY, LOW);
-      //  return -1;
+        //  digitalWrite(PIN_RELAY, LOW);
+        //  return -1;
     }
 
     //current time
@@ -148,12 +149,12 @@ float Pid::softPwm(float input, float output, float setpoint, uint32_t windowSiz
     if (input >= SetPoint) reachedSetpoint = true;
 
     //degree to power percentage ratio 1:1
-    if(!reachedFirstSetpoint) {
+    if (!reachedFirstSetpoint) {
         //1:1
         optimumOutput = MaximumOutput;
     } else {
         //1:1
-        optimumOutput = MaximumOutput * (1-(input/SetPoint));
+        optimumOutput = MaximumOutput * (1 - (input / SetPoint));
     }
 
     /*
@@ -189,19 +190,62 @@ float Pid::softPwm(float input, float output, float setpoint, uint32_t windowSiz
     }*/
 
     //optimum output = output, setpoint wurde noch nie erreicht
-    if (optimumOutput < 0) optimumOutput = 0;
+  //  if (optimumOutput < 0) optimumOutput = 0;
 
-    if (optimumOutput > MaximumOutput) optimumOutput = MaximumOutput;
+   // if (optimumOutput > MaximumOutput) optimumOutput = MaximumOutput;
 
     //optimale output größer als restzeit des fensters
-    if (optimumOutput > (msNow - windowStartTime)) {
+  //  if (optimumOutput > (msNow - windowStartTime)) {
 
-        digitalWrite(PIN_RELAY, HIGH);
-    } else if (optimumOutput < (msNow - windowStartTime)) {
+  //      digitalWrite(PIN_RELAY, HIGH);
+ //   } else if (optimumOutput < (msNow - windowStartTime)) {
 
-        digitalWrite(PIN_RELAY, LOW);
-    }
+    //    digitalWrite(PIN_RELAY, LOW);
+  //  }
 
     //return optimumOutput
     return optimumOutput;
+}
+
+void Pid::read() {
+//    unsigned long current = micros();
+ //   ZCTime = current - ZCTimeLast;
+ //   ZCTimeLast = current;
+    // Zündzeitpunkt berechnen : 1 full 50Hz wave =1/50=20ms
+    // Jeder Nulldurchgang: (50Hz)-> 10ms (1/2 Cycle)
+    // 10ms=10000us
+    // (10 000us - 10us) / 100 = 99 (approx)
+    //
+    //max 0.3% = dimtime max = 2.997
+
+   // ZCTime = dimtime;
+
+
+
+    if (value == 0) {
+        digitalWrite(PIN_RELAY, LOW);
+    } else {
+        int dimtime = 9900 - (25 * value); //dimTIme is minimum  7400us that's 85% therefore max output ist 25%
+        if(dimtime < 7400){
+            dimtime = 7400;
+        }
+        delayMicroseconds(dimtime);    // Wartet die Zeit zum zünden des TRIAC
+        digitalWrite(PIN_RELAY, HIGH);   // zünde TRIAC
+        delayMicroseconds(10);         // pause zum durchzünden
+        digitalWrite(PIN_RELAY, LOW);    // TRIAC löschen
+    }
+
+}
+
+void Pid::setPidPercentage(int percentage){
+    if(percentage > 100 || percentage < 0){
+        //check for valid value
+        value = 0;
+    } else {
+        value = percentage;
+    }
+}
+
+int Pid::getPidPercentage() {
+    return value;
 }

@@ -28,10 +28,13 @@
 </nav>
 
 <div id="content">
+    <label for="slider" class="form-label"  id="sliderLabel">Example range</label>
+    <input type="range" class="form-range" id="slider" value="0" min="0" max="100" step="1" onchange="updateSlider(this.value)">
     <h1 class="text-center" id="status_button"></h1>
-    <h1 class="text-center" id="status_temp_1"></h1>
-    <h1 class="text-center" id="status_temp_2"></h1>
-    <canvas id="chart"></canvas>
+    <!-- <h1 class="text-center" id="status_temp_1"></h1>-->
+     <!--<h1 class="text-center" id="status_temp_2"></h1>-->
+    <h1 class="text-center" id="status_temp_3"></h1>
+    <!--<canvas id="chart"></canvas> -->
 </div>
 
 <!--start tuning, tuning status, stop tuning, output, setpoint-->
@@ -52,6 +55,13 @@
                 yAxisId: 'y',
                 backgroundColor: 'rgba(14,84,5,0.42)',
                 borderColor: 'rgba(14,84,5,0.42)',
+                data: []
+            },
+            {
+                label: 'Temperature 3',
+                yAxisId: 'y',
+                backgroundColor: 'rgba(197,147,38,0.42)',
+                borderColor: 'rgba(208,166,20,0.42)',
                 data: []
             },
             {
@@ -119,10 +129,11 @@
 
     function updateStatus() {
         setInterval(function () {
-            requestUpdate("output");
-            requestUpdate("temp_1");
-            requestUpdate("temp_2");
-            requestUpdate("setPoint");
+           // requestUpdate("output");
+          //  requestUpdate("temp_1");
+           // requestUpdate("temp_2");
+            requestUpdate("temp_3");
+           // requestUpdate("setPoint");
             requestUpdate("pid");
             updateChart()
         }, 1000);
@@ -132,6 +143,12 @@
         addTempData(0, "{\"x\": " + Date.now() + ", \"y\": " + Math.random() + "}")
         addTempData(1, "{\"x\": " + Date.now() + ", \"y\": " + Math.random() + "}")
         addTempData(2, "{\"x\": " + Date.now() + ", \"y\": " + Math.random() + "}")
+    }
+
+    function updateSlider(slideAmount) {
+        requestAction("pid", slideAmount)
+        var sliderDiv = document.getElementById("sliderLabel");
+        sliderDiv.innerHTML = slideAmount;
     }
 
     function start() {
@@ -161,6 +178,9 @@
                 addTempData(0, data)
             } else if (type === "temp_2") {
                 document.getElementById('status_temp_2').innerText = data;
+                addTempData(1, data)
+            }  else if (type === "temp_3") {
+                document.getElementById('status_temp_3').innerText = data;
                 addTempData(1, data)
             }
         } else if (type.startsWith("setPoint")) {
@@ -198,14 +218,14 @@
         request.send();
     }
 
-    function requestAction(type) {
+    function requestAction(type, data) {
         const request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 updateSensor(type, this.responseText)
             }
         }
-        request.open("PUT", "/set?type=" + type, true);
+        request.open("PUT", "/set?type=" + type + "&data=" + data, true);
         request.send();
     }
 </script>

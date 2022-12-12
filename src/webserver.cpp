@@ -2,7 +2,6 @@
 
 #include "webserver.h"
 #include "sensors.h"
-#include "actions.h"
 #include "pid.h"
 #include "WebSerialLite.h"
 
@@ -12,8 +11,10 @@
 #include <FS.h>           //https://github.com/esp8266/Arduino
 
 #else
+
 #include <WiFi.h>
 #include <SPIFFS.h>
+
 #endif
 
 #include <ESPAsyncWebServer.h>
@@ -124,29 +125,29 @@ void WebServer::setup() {
 
             if (type == "output") {
                 //relay state
-                response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Pid::Output/10) + "}";
+                response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Pid::Output / 10) + "}";
             } else if (type == "pid") {
                 //relay state
-                response = String(Pid::IsActive);
+                response = String(Pid::ZCTime);
             } else if (type == "setPoint") {
                 //relay state
                 response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Pid::SetPoint) + "}";
             } else if (type == "led_1") {
                 //led state
-                response = String(Sensors::led_1);
-            } else if (type == "led_2") {
-                //led state
-                response = String(Sensors::led_2);
+                response = String(Sensors::led);
             } else if (type == "temp_1") {
                 //temp_base state
                 response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Sensors::temp_1) + "}";
             } else if (type == "temp_2") {
                 //temp_chip state
                 response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Sensors::temp_2) + "}";
+            } else if (type == "temp_3") {
+                //temp_chip state
+                response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Sensors::temp_3) + "}";
             } else if (type == "relay") {
                 //temp_chip state
                 response = "{\"x\":" + String(millis()) + ",\"y\":" + String(Sensors::relay) + "}";
-            }  else {
+            } else {
                 request->send(500, "text/plain", "wrong type");
                 return;
             }
@@ -167,13 +168,14 @@ void WebServer::setup() {
             String type = request->getParam("type")->value();
 
             if (type == "pid") {
-                Serial.println("toggle relay");
-                Actions::togglePid();
-                response = String(Pid::IsActive);
-            } else if (type == "led_1") {
-                response = String(Sensors::led_1);
-            } else if (type == "led_2") {
-                response = String(Sensors::led_2);
+                Pid::setPidPercentage(request->getParam("data")->value().toInt());
+
+                Serial.println("set pid");
+                Serial.println(Pid::getPidPercentage());
+
+                response = String(Pid::getPidPercentage());
+            } else if (type == "led") {
+                response = String(Sensors::led);
             } else {
                 request->send(500, "text/plain", "wrong type");
                 return;
